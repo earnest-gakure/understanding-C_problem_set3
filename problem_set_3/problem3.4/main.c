@@ -8,7 +8,7 @@ int main (){
    int nfiles = __argc; /*ignore the name of the program itself*/
    int argidx = 1;     /*ignore the name of the program itself*/
    char *currfile = " ";
-   char c;
+   char c; //character read
    /*count of words ,lines ,characters*/
    unsigned long nw=0,nl=0,nc=0;
   bool whitespace = true;
@@ -37,9 +37,9 @@ int main (){
             /*TODO :FILE HERE 
             processes the file  using getc(fp)
             */
-        nc++;
+        nc++; //counts no of  characters read
         if(whitespace && !isspace(c)){
-            nw++;
+            nw++;     //counts no of words
             whitespace = false; //we have shifted to nonspace chararacters
         }
         else if (!whitespace && isspace(c))//if we were not reading a space and the new charac is a space
