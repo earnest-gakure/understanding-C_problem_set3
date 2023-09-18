@@ -2,10 +2,10 @@
 #include <string.h>
 #include "dict.h"
 int num_words =5;//keep track of the number of words in the dictionary
-int num_of_defs= 5;
+int num_of_defs= 5; //keep track of the no of definitions in the dictionary 
 
 
-// Define the dictionary entries with words and definitions
+// initialize words defined in the dictionary 
 char words_list[MAX_DEFS][MAX_LENGTH] = {
     "orange",
     "grapes",
@@ -14,6 +14,7 @@ char words_list[MAX_DEFS][MAX_LENGTH] = {
     "pen" 
 };
 
+//an array of definitions 
 char the_dictionary[MAX_DEFS][MAX_LENGTH] = {
     "A fruit that grows on orange trees.",
     "Small purple type of fruits.",
@@ -22,9 +23,10 @@ char the_dictionary[MAX_DEFS][MAX_LENGTH] = {
     "An item used for writing."
 };
 
-
-
+//declaration and initialization of a pointer to the dictionary array 
 char *dictionary_pointer=the_dictionary[0];
+
+//declaration and initialization of a double pointer which points to dictionary_pointer
 char **pointer_to_dictionary_pointer = &dictionary_pointer; // Declare and assign the address of dict_pointer
 
 
@@ -32,6 +34,7 @@ void load_dictionary() {
     // Nothing to do here since the dictionary is already defined in dict.h
 }
 
+//function to check if the entered word is defined ,if yes return words definition
 char *lookup(char input_word[]) {
     for (int i = 0; i < num_words; i++) {
         if (strcmp(input_word, words_list[i]) == 0) {
@@ -42,7 +45,7 @@ char *lookup(char input_word[]) {
   
     return NULL; // Word not found
 }
-
+// a function to add the words not defined in the dictionary .the user also enters its meaning 
 void add_word( char new_word [] , char new_definition [])
 {
   if(num_words < MAX_DEFS){
