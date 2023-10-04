@@ -34,22 +34,40 @@ int main ()
  root = addnode(root , 5);
  root = addnode(root , 9);
  
+ int val;
+ do
+ {
+  puts("\nEnter 0:preorder , 1:inorder , 2:deltree");
+  scanf("%d",&val);
+    switch (val)
+    {
+    case 0:
+     puts("preorder :");
+     preorder(root);  //printing elements in preorder traversal
+      break;
+    case 1:
+    puts("\nInorder:");
+     inorder(root);
+     break;
+     case 2:
+       count = deltree(root);
+      printf("\nelements deleted are :%d\n",count);
+    default:
+    puts("Value not defined in any case");
+      break;
+    }
+ } while (val < 3);
  
- puts("preorder :");
- preorder(root);  //printing elements in preorder traversal
 
- puts("\nInorder:");
- inorder(root);
+ //puts("\n Postorder: ");
+ //postorder(root);
 
- puts("\n Postorder: ");
- postorder(root);
-
-   count = deltree(root);
- printf("\nelements deleted are :%d\n",count);
+  
+ 
     return 0;
 }
 
-//function to add new node to the binary tree
+//function to add new node to the binary tree with the given data
 struct tnode * talloc(int data)
 {
   struct tnode *newnode ;
@@ -65,25 +83,22 @@ struct tnode * talloc(int data)
     newnode->data = data ;
     newnode->left = NULL;
     newnode->right = NULL;
-    
   }
   
   return newnode;
 }
-//add node function 
+//add node function to insert data to the tree
 struct tnode *addnode(struct tnode *root , int data)
 {
-  
   //termination condition
   if (root == NULL)
   {
     //allocate node
     //return new root
   return talloc(data);
-   
   }
   //if data entered is less that in root go left node ele right
-  //recursive call
+  //recursive call to addnode function
   else if (data <= root->data)
   {
     root->left = addnode(root->left ,data);
@@ -96,7 +111,7 @@ struct tnode *addnode(struct tnode *root , int data)
   return root ;
 }
 //preorder function to display the elements using preorder traversal
-
+// ROOT LEFT RIGHT
 void preorder (struct tnode *root)
 {
     //termination condtion
@@ -106,6 +121,7 @@ void preorder (struct tnode *root)
     preorder(root->right);
 }
 //function to print elements using inorder traversal
+//LEFT ROOT RIGHT
 void inorder(struct tnode *root)
 {
   if (root == NULL){return ;}
@@ -114,6 +130,7 @@ void inorder(struct tnode *root)
   inorder(root->right);  
 } 
 //function to display elements using postorder traversal
+//LEFT RIGHT ROOT
 void postorder(struct tnode *root)
 {
     if (root == NULL){ return ; }
@@ -133,7 +150,7 @@ int deltree(struct tnode *root)
         return 0; //tree is already empty
     }
 
-//post order traversal
+  //post order traversal
     nodesDeleted = deltree(root->left) + deltree(root->right) + 1;
    //free current root node
     free(root);
