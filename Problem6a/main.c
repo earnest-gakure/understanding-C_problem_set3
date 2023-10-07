@@ -7,123 +7,20 @@
 //Binary operators to handle = + , - , *  , / 
 //unary operators = - (negatioon operator)
 
-/*Pseudocode 
-function enqueue (pqueue , ptoken)
-    set ptoken.linked_token to null
-    if pqueue.back is not null:
-       set pqueue.back.linked_token to ptoken
-    else:
-      set pqueue.back and pqueue.front to ptoken
+/*  Simple flow chat
+   Enter Expression
+       |
+   parse Expression into tokens(infix)
+       |
+   convert Infix tokens to Postfix tokens
+       |
+    Evaluate Postfix Expression 
+       |
+    Return final answer
+   
+   
+   */
 
-function dequeue (pqueue):
-    ctreate ptoken and set it to pqueue.front
-    if pqueue.front is not null:
-        set pqueue.front to ptoken.linked_token
-        if ptoken is equal to pqueue.back;
-           set pqueue.back to null
-        set ptoken.linked_token to null
-    Return ptoken :token deleted
-
-function push(ptop , ptoken):
-  set ptoken.linked_token to top 
-  set ptop to token
-
-function pop(ptop):
-  set ptoken to *ptop
-  if ptoken is not null :
-     set *ptop to ptoken.linked_token
-     set ptoken.linked_token to null
-
-    Return ptoken
-
-function new_token (type ,value)
-   allocate memeory for ptoken
-   set ptoken.type to type
-   set ptoken.value to value
-   set ptoken.linked_token to null
-Rturn ptoken
-
-function expr_to_infix (str)
-create  struct token_queue que_infix 
-  initialize  queue_infix.front and queue_infix.back to null
-   set type to operator 
-   read the str token using strtok()
-   for each token in strtok(str , DELIMS_STR)
-     if token is a single character:
-       switch on the character :
-       case '+' ,'-','*','/','(',')' 
-       in the case that the token falls : set type to OPERATOR ,
-        value.op_code to respective case i.e :ADD ,SUBTRACT,MULTIPLY,DIVIDE NEGATE
-        for '(' set type to LPARENS and ')' to RPARENS
-    else :
-    set type to OPERAND , value.operand to strtod(token ,null)
-    Enqueue a new token with type and value to que_infix
-    Return queue_infix
-
-function infix_to_postfix(pqueue_infix):
-  initialize stack_top to null
-  initialize queue_postfix.front and queue_postfix.back to NULL
-  while there is a token i pqueue_infix :
-    set ptoken to dequeue(pqueue_infix)
-    switch on ptoken.type :
-    case OPERAND:
-        Enqueue ptoken to queue_postfix
-    case OPERATOR :
-     while stack_top is not NULL and stack_top.type is OPERATOR and
-     (
-                    op_precedence[stack_top.value.op_code] > op_precedence[ptoken.value.op_code] or
-                    (op_operands[stack_top.value.op_code] == op_precedence[ptoken.value.op_code] and
-                    op_associativity[op_precedence[ptoken.value.op_code]] is LEFT)
-        ):
-         Enque pop(&stack_top) to queue_postfix
-         push ptoken to stack_top
-    case LPARENS:
-        push ptoken to stack_top
-    case RPARENS:
-         free ptoken 
-           while stack_top is not NULL:
-           set ptoken to pop(&stack_top)
-           if ptoken.type is LPARENS :
-              free ptoken 
-              break
-            Enqueue ptoken to queue_postfix
-    while stack_top is not NULL :
-       Enqueue pop(&stack_top) to queuue _postfix
-    Return queue_postfix
-
-Function Evaluate_postfix(pqueue_postfix):
-      initialize ans to 0.0
-      initialize stack_value to NULL
-      initialize operands array with size [2]
-      initialize ptoken and pvalue
-    while pqueue ! NULL
-     set ptoken to dequeue(pqueue_postfix)
-       switch ptoken.type:
-       case OPERAND:
-          push ptoken to stack_values
-       case OPERATOR:
-         for i=0; i<op_operands[ptoken.value.op_code] ; i++:
-           Set pvalue to pop(&stack_values)
-             set operands[i] to pvalue.value.operand
-             free pvalue
-        switch on ptoken.value.op_code:
-          process operands according to opcode 
-         note operands are popped in reverse order 
-       push new token with operator result to stack ->push new_token(OPERAND , value) to stack_values
-         free ptoken
-         set ans to stack_values.value.operand
-
-function evaluate(str)
-   copy str to strbuffer:
-   strbuffer = strcpy((char *)malloc(strlen(str)+1),str);
-	queue_infix = expr_to_infix(strbuffer);
-	queue_postfix = infix_to_postfix(&queue_infix);
-	ans = evaluate_postfix(&queue_postfix);
-	free(strbuffer); 
-	return ans;
-
-
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
