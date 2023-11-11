@@ -53,7 +53,7 @@ int main(int argc , char* argv[])
   }
   fclose(fp);
 
-  /*print all words that have frequency  > 100*/
+  /*print all words that have frequency  > 1000*/
   for (i = 0 ; i < MAX_BUCKET ; i ++)
   {
     for (wp = table [i] ; wp != NULL ; wp = wp->next)
