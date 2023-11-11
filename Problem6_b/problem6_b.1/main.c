@@ -1,9 +1,13 @@
-//implimentiong function pointers and callback functions
+/*implimentiong function pointers and callback functions
+  isorder and printrec will be our callback functions in this program 
+  in apply function is where function pointer will be implimented
+
+*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-//declaring a structure that will be used to create a class
+/*declaring a structure that will be used to create a class */
 struct student
 {
     char fname[100];
@@ -12,7 +16,7 @@ struct student
     int age ;
 };
 
-//declaration of class of struct type
+/* declaration of class of struct type */
 struct student class[]={
   {"Sean","Penn",2,21},
   {"Sean","Connery",4,25},
@@ -45,6 +49,7 @@ void printrec (void *prec , void *arg);
 //function to print record in age order
 void isolder(void *prec , void *arg);
 
+/*quick sort function ->void qsort(void∗ arr,int num,int size,int (∗fp)(void∗ pa,void∗pb))*/
 int main()
 {
     int age;
@@ -100,6 +105,8 @@ void printrec (void *prec , void *arg)
     struct student* pstud = (struct student*)prec;
     printf("%-20s%-20s%2d\n",pstud->fname,pstud->lname,pstud->age);
 }
+/*apply function iterates through the elements in the array 
+calling a function in each iteration */
 void apply(struct student* sarr ,int nrec , void(*fp)(void* prec , void *arg) , void *arg)
 {
     int i = 0 ;
