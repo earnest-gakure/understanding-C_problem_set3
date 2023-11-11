@@ -1,4 +1,8 @@
 //implimenting hash tables
+/*This code implements a basic hash table for counting word frequencies in a text file.
+This code demonstrates a basic implementation of a hash table for counting word frequencies in a file. 
+It uses a simple hash function and handles collisions by chaining.
+*/
 #include <stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -17,14 +21,13 @@ struct wordrec
 //function to create a new node
 struct wordrec* walloc(const char *str);
 //hash bucket 
-struct wordrec* table[MAX_BUCKET]; /*an array of structure variable*/
+struct wordrec* table[MAX_BUCKET]; /*an array of structure representing the hash table*/
 
-/*function hashing 
-  it produces hash code for a string  
-  multipliers 31,35 works well*/
+/*hashing function 
+  uses simple harshing algorithm to generate a hash code for the given string*/
 unsigned long hashstring(const char *str);
 
-/*function lookup
+/*lookup function 
 it returns pointer to the word  or creates  it if required*/
 struct wordrec* lookup(const char *str , int create);
 
@@ -34,9 +37,9 @@ void cleartable (void );
 int main(int argc , char* argv[])
 {
    FILE *fp = fopen("book.txt" , "r");
-   char word[1024] ;/*big enough*/
+   char word[1024] ;/*buffer to store each word*/
    struct wordrec* wp = NULL ;
-   int i = 0 ;
+   int i = 0 ;/*loop counter */
 
   //using memeset function to initialize table to 0
   memset(table , 0 ,sizeof(table)); 
@@ -64,6 +67,8 @@ int main(int argc , char* argv[])
   cleartable();
     return 0 ;
 }
+
+/*function to dynamically allocate memmory*/
 struct wordrec* walloc(const char *str)
 {
  //dynamically allocating memory for each node created
@@ -79,6 +84,7 @@ struct wordrec* walloc(const char *str)
  }
  return p;
 }
+/*hashing function*/
 unsigned long hashstring(const char *str)
 {
     unsigned long hash = 0 ;
@@ -89,6 +95,7 @@ unsigned long hashstring(const char *str)
     }
     return hash % MAX_BUCKET ;
 }
+/*lookup function*/
 struct wordrec* lookup(const char *str, int create)
 {
     unsigned long hash = hashstring(str); /*starting point*/
@@ -108,12 +115,13 @@ struct wordrec* lookup(const char *str, int create)
     {
         curr = walloc(str);
         curr->next = wp;
-        table[hash] = curr;
+        table[hash] = curr;  /*Updates the head of the linked list in the hash table bucket to the new node*/
     }
 
     return curr;
 }
-
+/*function to clear table
+ deallocates memory used by the hash table*/
 void cleartable()
 {
     struct wordrec* wp = NULL , *p= NULL;
