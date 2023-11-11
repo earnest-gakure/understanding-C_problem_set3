@@ -1,8 +1,9 @@
+//how to combine union and structure to extract bit fields
+//in a given data
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-//how to combine union and structure to extract bit fields
-//in a given data
 
 union packet
 {
